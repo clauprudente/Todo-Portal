@@ -10,22 +10,30 @@ export function useTodos() {
     }, [todos]);
 
     const addTodo = (title: string, description: string): void => {
-        const updatedTodos: Todo[] = [
-            ...todos,
-            {
-                id: crypto.randomUUID(),
-                title,
-                description,
-                created_at: Date.now(),
-                completed: false
-            }]
+        const updatedTodo = {
+            id: crypto.randomUUID(),
+            title,
+            description,
+            created_at: Date.now(),
+            completed: false
+        }
 
-        setTodos(updatedTodos);
-        saveTodos(todos);
+        setTodos((prev) => [
+            ...prev,
+            updatedTodo]);
     }
+
+    const toggleTodo = (id: string) => {
+        setTodos((prev) =>
+            prev.map((todo) =>
+                todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            )
+        );
+    };
 
     return {
         todos,
-        addTodo
+        addTodo,
+        toggleTodo
     };
 }

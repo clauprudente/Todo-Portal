@@ -1,16 +1,19 @@
 import { TodoItem } from "./TodoItem"
 import type { Todo } from "@/types/todo";
 
-type TodoItemProps = {
+type TodoListProps = {
     todos: Todo[];
+    onToggle: (id: string) => void;
 };
 
-export function TodoList({ todos }: TodoItemProps) {
+export function TodoList({ todos, onToggle }: TodoListProps) {
     return (<ul>
         {todos.map((todo) =>
             <TodoItem
                 key={todo.id}
-                todo={todo} />
+                todo={todo}
+                onToggle={onToggle} />
+
         )}
     </ul>);
 };

@@ -4,12 +4,12 @@ import { TodoList } from './components/TodoList'
 import { useTodos } from "./hooks/useTodos"
 
 function App() {
-  const { todos, addTodo } = useTodos();
+  const { todos, addTodo, toggleTodo } = useTodos();
 
 
   return (<>
     <TodoForm onAdd={addTodo} />
-    <TodoList todos={todos} />
+    <TodoList todos={todos} onToggle={toggleTodo} />
   </>
   )
 }
