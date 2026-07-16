@@ -1,10 +1,10 @@
 export type Todo = {
-    id: string;
-    title: string;
-    description?: string;
-    created_at: number;
-    completed: boolean;
-}
+  id: string;
+  title: string;
+  description?: string;
+  created_at: number;
+  completed: boolean;
+};
 
 export type CreateTodoInput = Omit<Todo, 'id' | 'created_at' | 'completed'>;
 
