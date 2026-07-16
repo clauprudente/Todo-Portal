@@ -1,11 +1,13 @@
+
 import type { Todo } from "@/types/todo";
 
 type TodoItemProps = {
     todo: Todo;
     onToggle: (id: string) => void;
+    onDelete: (id: string) => void;
 };
 
-export function TodoItem({ todo, onToggle }: TodoItemProps) {
+export function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
     return (
         <li>
             <input
@@ -14,7 +16,7 @@ export function TodoItem({ todo, onToggle }: TodoItemProps) {
                 onChange={() => onToggle(todo.id)}
             />
             <span>{todo.title}</span>
-            <span>Remove</span>
+            <button type="button" onClick={() => onDelete(todo.id)}>Remove</button>
         </li>
     );
 }

@@ -22,6 +22,7 @@ export function TodoForm({ onAdd }: TodoFormProps) {
 
         setTitle("");
         setDescription("");
+        setError(null);
     };
 
 
