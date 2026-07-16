@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { validateTitle } from "@/utils/todo";
 
 type TodoFormProps = {
     onAdd: (title: string, description: string) => void;
@@ -7,9 +8,15 @@ type TodoFormProps = {
 export function TodoForm({ onAdd }: TodoFormProps) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [error, setError] = useState<string | null>(null);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        const validationError = validateTitle(title);
+        if (validationError) {
+            setError(validationError);
+            return;
+        }
 
         onAdd(title, description);
 
@@ -25,9 +32,18 @@ export function TodoForm({ onAdd }: TodoFormProps) {
                 id="title"
                 type="text"
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Add a task title"
+                onChange={(e) => {
+                    setTitle(e.target.value);
+                    if (error) setError(null);
+                }} placeholder="Add a task title"
+                aria-invalid={error ? true : undefined}
+                aria-describedby={error ? "title-error" : undefined}
             />
+            {error && (
+                <span id="title-error" role="alert">
+                    {error}
+                </span>
+            )}
         </div>
         <div>
             <label htmlFor="description">Description</label>

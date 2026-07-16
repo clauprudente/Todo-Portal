@@ -6,3 +6,4 @@ export type Todo = {
     completed: boolean;
 }
 
+export type CreateTodoInput = Omit<Todo, 'id' | 'created_at' | 'completed'>;

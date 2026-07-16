@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import type { Todo } from "@/types/todo";
 import { getTodos, saveTodos } from "@/services/todo.storage";
+import { createTodo } from "@/utils/todo";
 
 export function useTodos() {
     const [todos, setTodos] = useState<Todo[]>(() => getTodos());
@@ -10,13 +11,7 @@ export function useTodos() {
     }, [todos]);
 
     const addTodo = (title: string, description: string): void => {
-        const updatedTodo = {
-            id: crypto.randomUUID(),
-            title,
-            description,
-            created_at: Date.now(),
-            completed: false
-        }
+        const updatedTodo = createTodo({ title, description })
 
         setTodos((prev) => [
             ...prev,
