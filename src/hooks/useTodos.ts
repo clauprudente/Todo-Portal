@@ -27,8 +27,6 @@ export function useTodos() {
     };
 
     const deleteTodo = (id: string) => {
-        console.log(id);
-
         setTodos((prev) => prev.filter((todo) => todo.id !== id));
     }
 
