@@ -10,7 +10,7 @@ type TodoItemProps = {
     onUpdate: (id: string, patch: UpdateTodoInput) => void;
 };
 
-export function TodoItem({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) {
+export const TodoItem = ({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) => {
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [title, setTitle] = useState<string>(todo.title);
     const [description, setDescription] = useState<string>(todo.description ?? "");

@@ -5,7 +5,7 @@ type TodoFormProps = {
     onAdd: (title: string, description: string) => void;
 };
 
-export function TodoForm({ onAdd }: TodoFormProps) {
+export const TodoForm = ({ onAdd }: TodoFormProps) => {
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const [error, setError] = useState<string | null>(null);

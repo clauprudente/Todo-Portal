@@ -9,7 +9,7 @@ type TodoListProps = {
     onUpdate: (id: string, patch: UpdateTodoInput) => void;
 };
 
-export function TodoList({ todos, onToggle, onDelete, onUpdate }: TodoListProps) {
+export const TodoList = ({ todos, onToggle, onDelete, onUpdate }: TodoListProps) => {
     return (todos.length === 0 ? <p>No tasks found.</p> : <ul>
         {todos.map((todo) =>
             <TodoItem

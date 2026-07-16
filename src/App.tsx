@@ -1,27 +1,30 @@
 
 import { useState, useMemo } from 'react';
-import { SearchInput } from './components/SearchBar';
+import { SearchInput } from './components/SearchInput';
+import { StatusFilter } from './components/StatusFilter'
 import { TodoForm } from './components/TodoForm'
 import { TodoList } from './components/TodoList'
 import { useTodos } from "./hooks/useTodos"
-import { filterTodosByName } from './utils/todo';
+import { filterTodosByName, filterTodosByStatus, } from './utils/todo';
+import type { TodoStatus } from "@/types/todo";
+
 
 function App() {
   const { todos, addTodo, toggleTodo, deleteTodo, updateTodo } = useTodos();
-
   const [search, setSearch] = useState("");
+  const [status, setStatus] = useState<TodoStatus>('all');
 
-  const visibleTodos = useMemo(
-    () => filterTodosByName(todos, search),
-    [todos, search],
-  );
+  const filteredTodos = useMemo(() => {
+    const byName = filterTodosByName(todos, search);
+    return filterTodosByStatus(byName, status);
+  }, [todos, search, status]);
 
   return (<>
     <TodoForm onAdd={addTodo} />
     <SearchInput searchValue={search} onSearchChange={setSearch} />
-
+    <StatusFilter value={status} onChange={setStatus} />
     <TodoList
-      todos={visibleTodos}
+      todos={filteredTodos}
       onToggle={toggleTodo}
       onDelete={deleteTodo}
       onUpdate={updateTodo} />
