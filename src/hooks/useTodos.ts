@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { Todo } from "@/types/todo";
+import type { Todo, UpdateTodoInput } from "@/types/todo";
 import { getTodos, saveTodos } from "@/services/todo.storage";
 import { createTodo } from "@/utils/todo";
 
@@ -18,7 +18,7 @@ export function useTodos() {
             updatedTodo]);
     }
 
-    const toggleTodo = (id: string) => {
+    const toggleTodo = (id: string): void => {
         setTodos((prev) =>
             prev.map((todo) =>
                 todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -26,14 +26,23 @@ export function useTodos() {
         );
     };
 
-    const deleteTodo = (id: string) => {
+    const deleteTodo = (id: string): void => {
         setTodos((prev) => prev.filter((todo) => todo.id !== id));
     }
+
+    const updateTodo = (id: string, patch: UpdateTodoInput): void => {
+        setTodos((prev) =>
+            prev.map((todo) =>
+                todo.id === id ? { ...todo, ...patch } : todo
+            )
+        );
+    };
 
     return {
         todos,
         addTodo,
         toggleTodo,
-        deleteTodo
+        deleteTodo,
+        updateTodo,
     };
 }

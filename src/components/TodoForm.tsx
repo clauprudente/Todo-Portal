@@ -6,11 +6,11 @@ type TodoFormProps = {
 };
 
 export function TodoForm({ onAdd }: TodoFormProps) {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
+    const [title, setTitle] = useState<string>("");
+    const [description, setDescription] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
         const validationError = validateTitle(title);
         if (validationError) {

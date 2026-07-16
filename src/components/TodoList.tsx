@@ -1,21 +1,24 @@
 
 import { TodoItem } from "./TodoItem"
-import type { Todo } from "@/types/todo";
+import type { Todo, UpdateTodoInput } from "@/types/todo";
 
 type TodoListProps = {
     todos: Todo[];
     onToggle: (id: string) => void;
     onDelete: (id: string) => void;
+    onUpdate: (id: string, patch: UpdateTodoInput) => void;
 };
 
-export function TodoList({ todos, onToggle, onDelete }: TodoListProps) {
+export function TodoList({ todos, onToggle, onDelete, onUpdate }: TodoListProps) {
     return (<ul>
         {todos.map((todo) =>
             <TodoItem
                 key={todo.id}
                 todo={todo}
                 onToggle={onToggle}
-                onDelete={onDelete} />
+                onDelete={onDelete}
+                onUpdate={onUpdate} />
+
 
         )}
     </ul>);
