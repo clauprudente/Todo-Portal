@@ -17,3 +17,14 @@ export const validateTitle = (title: string): string | null => {
     if (!todoTrimmed) return 'The title is mandatory.';
     return null;
 };
+
+export const filterTodosByName = (todos: Todo[], search: string): Todo[] => {
+    const normalizedTerm = search.trim().toLowerCase();
+    if (!normalizedTerm) return todos;
+
+    return todos.filter(
+        (todo) =>
+            todo.title.includes(normalizedTerm) ||
+            todo?.description?.includes(normalizedTerm),
+    );
+};

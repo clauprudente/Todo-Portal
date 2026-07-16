@@ -10,7 +10,7 @@ type TodoListProps = {
 };
 
 export function TodoList({ todos, onToggle, onDelete, onUpdate }: TodoListProps) {
-    return (<ul>
+    return (todos.length === 0 ? <p>No tasks found.</p> : <ul>
         {todos.map((todo) =>
             <TodoItem
                 key={todo.id}

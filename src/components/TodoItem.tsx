@@ -44,6 +44,10 @@ export function TodoItem({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) 
                 value={title}
                 onChange={(e) => {
                     setTitle(e.target.value);
+
+                    if (error) {
+                        setError(null);
+                    }
                 }}
                 aria-invalid={error ? true : undefined}
             />
@@ -69,8 +73,11 @@ export function TodoItem({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) 
             />
             <span>{todo.title}</span>
             {todo.description && <span>{todo.description}</span>}
-            <button type="button" onClick={() => setIsEditing(true)}>Edit</button>
-            <button type="button" onClick={() => onDelete(todo.id)}>Remove</button>
+            <small>
+                {new Date(todo.created_at).toLocaleDateString()}
+            </small>
+            <button type="button" aria-label={`Edit ${todo.title}`} onClick={() => setIsEditing(true)}>Edit</button>
+            <button type="button" aria-label={`Remove ${todo.title}`} onClick={() => onDelete(todo.id)}>Remove</button>
         </li>
     );
 }
