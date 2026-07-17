@@ -36,6 +36,13 @@ export const TodoItem = ({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) 
     setIsEditing(false);
   };
 
+  const startEditing = (): void => {
+    setTitle(todo.title);
+    setDescription(todo.description ?? '');
+    setError(null);
+    setIsEditing(true);
+  };
+
   return isEditing ? (
     <li>
       <input
@@ -49,6 +56,7 @@ export const TodoItem = ({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) 
           }
         }}
         aria-invalid={error ? true : undefined}
+        aria-describedby={error ? 'title-error-item' : undefined}
       />
       {error && (
         <span id="title-error-item" role="alert">
@@ -73,7 +81,7 @@ export const TodoItem = ({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) 
       <span>{todo.title}</span>
       {todo.description && <span>{todo.description}</span>}
       <small>{new Date(todo.created_at).toLocaleDateString()}</small>
-      <button type="button" aria-label={`Edit ${todo.title}`} onClick={() => setIsEditing(true)}>
+      <button type="button" aria-label={`Edit ${todo.title}`} onClick={startEditing}>
         Edit
       </button>
       <button type="button" aria-label={`Remove ${todo.title}`} onClick={() => onDelete(todo.id)}>

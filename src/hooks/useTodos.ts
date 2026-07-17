@@ -7,7 +7,7 @@ export function useTodos() {
   const [todos, setTodos] = useState<Todo[]>(() => getTodos());
 
   useEffect(() => {
-    saveTodos(todos);
+    saveTodos(todos); // to-do: use boolean return to show to the user
   }, [todos]);
 
   const addTodo = (title: string, description: string): void => {

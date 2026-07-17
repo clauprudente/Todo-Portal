@@ -39,7 +39,7 @@ export const TodoForm = ({ onAdd }: TodoFormProps) => {
           }}
           placeholder="Add a task title"
           aria-invalid={error ? true : undefined}
-          aria-describedby={error ? 'title-error' : undefined}
+          aria-describedby={error ? 'title-error-form' : undefined}
         />
         {error && (
           <span id="title-error-form" role="alert">
