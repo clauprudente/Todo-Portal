@@ -1,73 +1,89 @@
-# React + TypeScript + Vite
+# Todo List
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A task management application developed using React and TypeScript, allowing users to create, edit, delete, search for, and filter tasks. Data is persisted locally using Local Storage.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React
+- TypeScript
+- Vite
+- CSS
+- Local Storage
+- Vitest (testes)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Create a task
+2. Edit an existing task
+3. Remove a task
+4. Mark a task as completed
+5. Search for tasks by title or description
+6. Filter tasks by their status
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Install dependencies
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Start the development server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+npm run dev
 ```
+
+### Build for production
+
+```bash
+npm run build
+```
+
+### Preview the production build
+
+```bash
+npm run preview
+```
+
+### Run the tests
+
+```bash
+npm run test
+```
+
+## Design Decisions
+
+- Custom Hook (**useTodos**) centralizes the application's state management.
+- Local Storage is abstracted behind a service layer to simplify future migration to an API.
+- Utility functions encapsulate validation, filtering, normalization, and todo creation.
+- Strong typing is used throughout the application to improve maintainability and type safety.
+
+## Architecture
+
+The project is organized using a simple separation of responsibilities to improve maintainability, readability, and scalability.
+
+```text
+src/
+├── components/   # Reusable UI components
+├── hooks/        # Custom React hooks
+├── services/     # Data persistence (Local Storage)
+├── types/        # Shared TypeScript types
+├── utils/        # Business logic and helper functions
+├── App.tsx
+└── main.tsx
+```
+
+### Responsibilities
+
+- **components**: Contains reusable and presentational UI components.
+- **hooks**: Encapsulates state management and application logic using custom React hooks.
+- **services**: Provides an abstraction layer for data persistence, making it easy to replace Local Storage with an API in the future.
+- **types**: Centralizes shared TypeScript types and interfaces.
+- **utils**: Contains pure utility functions such as validation, filtering, normalization, and todo creation.
+
+This structure keeps business logic separate from presentation, promotes code reuse, and makes the application easier to maintain and extend.
+
+### Author
+
+Developed by Cláudia Maria Prudente dos Santos
