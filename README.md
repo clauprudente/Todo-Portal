@@ -1,6 +1,6 @@
 # Todo List
 
-A task management application developed using React and TypeScript, allowing users to create, edit, delete, search for, and filter tasks. Data is persisted locally using Local Storage.
+A todo application developed using React and TypeScript, allowing users to create, edit, delete, search for, and filter tasks. Data is persisted locally using Local Storage.
 
 ## Tech Stack
 
@@ -57,7 +57,6 @@ npm run test
 - Custom Hook (**useTodos**) centralizes the application's state management.
 - Local Storage is abstracted behind a service layer to simplify future migration to an API.
 - Utility functions encapsulate validation, filtering, normalization, and todo creation.
-- Strong typing is used throughout the application to improve maintainability and type safety.
 
 ## Architecture
 
