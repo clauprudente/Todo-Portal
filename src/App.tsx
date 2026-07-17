@@ -18,17 +18,28 @@ function App() {
   }, [todos, search, status]);
 
   return (
-    <>
-      <TodoForm onAdd={addTodo} />
-      <SearchInput searchValue={search} onSearchChange={setSearch} />
-      <StatusFilter value={status} onChange={setStatus} />
-      <TodoList
-        todos={filteredTodos}
-        onToggle={toggleTodo}
-        onDelete={deleteTodo}
-        onUpdate={updateTodo}
-      />
-    </>
+    <div className="app">
+      <header className="app__header">
+        <h1>Todo List</h1>
+      </header>
+      <main className="app__main">
+        <TodoForm onAdd={addTodo} />
+        <div className="toolbar">
+          <div className="toolbar__search">
+            <SearchInput searchValue={search} onSearchChange={setSearch} />
+          </div>
+          <div className="toolbar__filter">
+            <StatusFilter value={status} onChange={setStatus} />
+          </div>
+        </div>
+        <TodoList
+          todos={filteredTodos}
+          onToggle={toggleTodo}
+          onDelete={deleteTodo}
+          onUpdate={updateTodo}
+        />
+      </main>
+    </div>
   );
 }
 

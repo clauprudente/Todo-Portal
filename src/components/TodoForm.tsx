@@ -26,38 +26,42 @@ export const TodoForm = ({ onAdd }: TodoFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="title">Title</label>
-        <input
-          id="title"
-          type="text"
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-            if (error) setError(null);
-          }}
-          placeholder="Add a task title"
-          aria-invalid={error ? true : undefined}
-          aria-describedby={error ? 'title-error-form' : undefined}
-        />
-        {error && (
-          <span id="title-error-form" role="alert">
-            {error}
-          </span>
-        )}
+    <form className="todo-form" onSubmit={handleSubmit}>
+      <div className="todo-form__fields">
+        <div>
+          <label htmlFor="title">Title</label>
+          <input
+            id="title"
+            type="text"
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              if (error) setError(null);
+            }}
+            placeholder="Add a task title"
+            aria-invalid={error ? true : undefined}
+            aria-describedby={error ? 'title-error-form' : undefined}
+          />
+          {error && (
+            <span id="title-error-form" role="alert">
+              {error}
+            </span>
+          )}
+        </div>
+        <div>
+          <label htmlFor="description">Description</label>
+          <input
+            id="description"
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Add a task description"
+          />
+        </div>
       </div>
-      <div>
-        <label htmlFor="description">Description</label>
-        <input
-          id="description"
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Add a task description"
-        />
-      </div>
-      <button type="submit">Add</button>
+      <button type="submit" className="btn btn--primary">
+        Add
+      </button>
     </form>
   );
 };
